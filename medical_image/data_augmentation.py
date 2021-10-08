@@ -1,35 +1,35 @@
 import torch
-from patch_transform import *
 import numpy as np
+from ingradient_library.patch_transform import *
 
-class DataAugmentation(object):
+class nnUNet_DataAugmentation(object):
     def __init__(self, affine_kwargs = None, noise_kwargs = None, blur_kwargs = None, contrast_kwargs = None,
-                 gamma_kwargs = None, bright_kwargs = None, mirror_kwargs = None,
+                 gamma_kwargs = None, bright_kwargs = None, mirror_kwargs = None, device = 0,
                  affine_prob = 0.2, noise_prob = 0.15, blur_prob = 0.2, contrast_prob = 0.15, gamma_prob = 0.15, bright_prob = 0.15, mirror_prob = 0.5):
 
 #    def __init__(self, gamma_range = (0.5, 2), epsilon = 1e-7, device = None, retain_stats = True):
         if affine_kwargs == None:
-            affine_kwargs = {'degree':[30,30,30], 'axis':[0,1,2], 'scale':[0.85, 1.15], 'use_gpu': True, 'device':0}
+            affine_kwargs = {'degree':[30,30,30], 'axis':[0,1,2], 'scale':[0.85, 1.15], 'use_gpu': True, 'device':device}
         
         if noise_kwargs ==  None:
-            noise_kwargs = {'device': 0, 'prob_per_modalities': 0.5}
+            noise_kwargs = {'device': device, 'prob_per_modalities': 0.5}
         
         if blur_kwargs == None:
-            blur_kwargs = {'sigma': 1.4, 'width':3, 'device':0}
+            blur_kwargs = {'sigma': 1.4, 'width':3, 'device':device}
         
         if contrast_kwargs == None:
-            contrast_kwargs = {'contrast_range' : [0.65, 1.5], 'preserve_range' : True, 'device':0}
+            contrast_kwargs = {'contrast_range' : [0.65, 1.5], 'preserve_range' : True, 'device':device}
         
         if gamma_kwargs == None:
-            gamma_kwargs = {'gamma_range': (0.5, 1.5), 'epsilon':1e-7, 'device':0, 'retain_stats':True}
+            gamma_kwargs = {'gamma_range': (0.5, 1.5), 'epsilon':1e-7, 'device':device, 'retain_stats':True}
         
         if bright_kwargs == None:
-            bright_kwargs = {'device':0 , 'rng': [0.7, 1.3]}
+            bright_kwargs = {'device':device , 'rng': [0.7, 1.3]}
         
         if mirror_kwargs == None:
             mirror_kwargs = {'x_prob':0.5, 'y_prob':0.5,'z_prob':0.5}
 
-
+        self.device= device
         self.affine_transform = Batch_Affine_3D(**affine_kwargs)
         self.noise_transform = Batch_Gaussian_Noise(**noise_kwargs)
         self.blur_transform = Batch_Gaussian_Blur_3D(**blur_kwargs)
@@ -47,14 +47,14 @@ class DataAugmentation(object):
         self.mirror_prob = mirror_prob
 
 
-    def __call__(self, images, seg, device = 0):
+    def __call__(self, images, seg):
         images = images.float()
         seg = seg.float()
-        if images.device.index != device:
-            images = images.to(device)
+        if images.device.index != self.device:
+            images = images.to(self.device)
 
-        if seg.device.index != device:
-            seg = seg.to(device)
+        if seg.device.index != self.device:
+            seg = seg.to(self.device)
         
 
         affine_prob = np.random.uniform(0, 1)
@@ -86,7 +86,7 @@ class DataAugmentation(object):
         if gamma_prob < self.gamma_prob:
             images = self.gamma_transform(images)
         
-        if affine_prob < self.affine_prob:
+        if mirror_prob < self.mirror_prob:
             self.mirror_transform.get_mirror_axis()
             images = self.mirror_transform(images)
             seg = self.mirror_transform(seg)
@@ -94,6 +94,11 @@ class DataAugmentation(object):
         
 
         return images, seg
+
+        
+
+
+        
 
         
 

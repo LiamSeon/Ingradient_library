@@ -12,10 +12,7 @@ class Batch_Affine_3D(object):
         self.axis = axis
         self.degree = np.array(degree)
         self.scale = np.array(scale)
-        
-        if self.use_gpu:
-            self.device = device
-    
+        self.device = device
 
     def get_matrices_and_coords(self, images):
         if len(images.shape) == 5:
@@ -44,7 +41,7 @@ class Batch_Affine_3D(object):
         img_size = [nx,ny,nz] #patch size이기 때문에 동일
 
         for batch_index in range(bs):
-            transformed_coords = self.gpu_calculate_coornidates(self.coords, self.matrices, img_size) #coorniates를 Affine 변환
+            transformed_coords = self.gpu_calculate_coornidates(self.coords, self.matrices, img_size).long() #coorniates를 Affine 변환
             if not seg:
                 images[batch_index, :, :, :, :] = images[batch_index, :, transformed_coords[0], transformed_coords[1], transformed_coords[2]]
                 images = images.reshape(bs, n_modalities, nx, ny, nz)
@@ -107,11 +104,12 @@ class Batch_Affine_3D(object):
 
         for i in range(len(matrices)-1):
             matrices[i+1] = torch.matmul(matrices[i], matrices[i+1])
+    
         coords = torch.matmul(matrices[-1], coords.reshape(3, -1)).reshape(*before_shape)
         coords = coords + half_img_size
         coords = coords.reshape(3, -1).round() #Mapping 해주는 함수
-        coords = torch.clamp(coords, torch.Tensor([[0], [0], [0]]).to(0).int(), torch.Tensor(coords_bound).to(0).int()).long()
-        
+        coords = torch.min(torch.max(coords,  torch.Tensor([[0], [0], [0]]).long().to(self.device)) ,torch.Tensor(coords_bound).long().to(self.device)).long()
+
         return coords.reshape(*before_shape)
 
 
@@ -139,8 +137,6 @@ class Batch_Gaussian_Noise(object):
             else:
                 noise_array = torch.vstack((noise_array, torch.zeros((nx,ny,nz)).unsqueeze(0)))
         noise_array = torch.tile(noise_array, (bs, 1,1,1,1)).to(self.device)
-        if images.device.index != self.device:
-            images = images.to(self.device)
 
         return images + noise_array
 
@@ -286,5 +282,9 @@ class Batch_Mirroring(object):
 
 
     def __call__(self, images):
-        return torch.flip(images, self.mirror_axis)
+        if self.mirror_axis:
+            return torch.flip(images, self.mirror_axis)
+        
+        else:
+            return images
         

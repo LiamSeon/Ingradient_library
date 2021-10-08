@@ -42,7 +42,7 @@ class Inference(object):
         while not self.is_end:
             model.eval()
             patch = self.get_inference_patch()
-            output = model(patch.unsqueeze(0).float().to(0)).squeeze(0)[0]
+            output = model(patch.unsqueeze(0).float().to(self.device)).squeeze(0)[0]
             output = output * self.filter
             output = output.detach().cpu()
             lower_bound, upper_bound = self.get_patch_bound()

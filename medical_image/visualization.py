@@ -26,7 +26,7 @@ def visualization(output, target):
     # output shape = (batch size, channel size, x, y, z)
     n_cls = output.shape[1]
     center = output.shape[2]//2
-    plt.figure(figsize=(3, 3*(n_cls+2)))
+    plt.figure(figsize=(10,12))
 
     for c_i in range(n_cls):
         plt.subplot(int(str(1)+str(n_cls+2)+str(c_i+1)))

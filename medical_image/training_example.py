@@ -4,7 +4,7 @@ import torch
 from dataloads import *
 from unet3d import *
 from preprocessing import *
-from dataaugmentation import *
+from data_augmentation import *
 from deepsupervision_loss import *
 from visualization import *
 
@@ -44,7 +44,7 @@ for e in range(15, epoch):
     
     val_dl.new_epoch()
     val_iter_loss = []
-
+    model.eval()
     visualization_index = 24
     while not val_dl.is_end():
         with torch.no_grad():
