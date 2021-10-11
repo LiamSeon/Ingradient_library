@@ -17,9 +17,6 @@ https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
 ![스크린샷 2021-10-12 오전 3 29 50](https://user-images.githubusercontent.com/68293683/136837440-15a8d492-75c7-4db8-a149-e37d714d460d.png)
 
 
-
-(Custom이 MiD를 뜻함.)
-
 ### 2. Optimized Resampling Methods
 - Fully Vectorization support, unlike existing medical image frameworks.
 - GPU method support for full patch size model.
