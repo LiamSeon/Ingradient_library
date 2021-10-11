@@ -3,8 +3,9 @@
 
 ## 1. Instructions
 
-- Korean
+- (Korean)
 https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
+- (English)
 
 
 ## 2. Features
