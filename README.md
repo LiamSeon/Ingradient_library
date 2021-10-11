@@ -1,14 +1,15 @@
 # MiD (Medical Image Deep Learning Framework)
 
 
-## 사용 방법
+## 1. Instructions
 
+- Korean
 https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
 
 
-## 특징
+## 2. Features
 
-### 1. 빠른 Data Augmentation
+### 1. Fully Vectorized Data Augmentation Methods
 ![스크린샷 2021-10-12 오전 3 28 58](https://user-images.githubusercontent.com/68293683/136837339-4d2836f1-9ad1-4187-b5b9-8a0e6b7e3c81.png)
 
 ![스크린샷 2021-10-12 오전 3 29 15](https://user-images.githubusercontent.com/68293683/136837365-2c2534e8-e668-42c5-a5af-89decb96a970.png)
@@ -19,24 +20,23 @@ https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
 
 (Custom이 MiD를 뜻함.)
 
-### 2. 최적화된 Resampling
-- 기존 medical image framework들과 달리 완전한 Vectorization 지원.
-- Full Patch Size 모델을 진행할 때는 GPU 메소드 지원
-- 기존 대비 50% 이상 속도 향상.
+### 2. Optimized Resampling Methods
+- Fully Vectorization support, unlike existing medical image frameworks.
+- GPU method support for full patch size model.
+- Computational speed improvement by more than 50% compared to the previous one.
 
 
-### 3. Class Imbalance 해결 파이프라인 구축
-- nnUNet의 Oversampling 기법 적용.
-- Default 값으로 자동으로 Oversample Patch를 뽑아냄.
-- Pipeline상에 Class Weight 적용 지원
+### 3. Solving Class Imbalanced problem
+- Application of nnUNet's oversampling technique.
+- Automatically extract the oversample Patch with the default value.
+- Support for calculating class weights.
 
 
-### 4. TensorBoard 지원
-- trainer 사용 시 자동으로 tensorboard에 Loss 기록
+### 4. TensorBoard
+- Automatically record loss on the tensorboard when using the trainer.
 
-### 5. 최적화 파이프라인
-- 전처리 값들의 Default가 SOTA에 등재된 Default로 맞춰져 있음.
-- 모든 메소드들에 대한 Vectorization 진행.
+### 5. Optimized Default Values
+- The default of the preprocessing values is set to the default registered in the SOTA.
 
-### 6. 확장성
-- 모든 Pytorch Module과 확장 가능
+### 6. Scalability
+- Connected to pytorch methods
