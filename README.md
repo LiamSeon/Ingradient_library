@@ -1,11 +1,6 @@
 # MiD (Medical Image Deep Learning Framework)
 
 
-## pip install MiD
-
-- 패키지 다운로드
-
-
 ## 사용 방법
 
 https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
