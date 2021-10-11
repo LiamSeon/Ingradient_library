@@ -1,1 +1,1 @@
-# MiD (Medical Image DeepLearning Frameworks)
+# MiD (Medical Image Deep Learning Frameworks)
