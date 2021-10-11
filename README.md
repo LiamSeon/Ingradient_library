@@ -25,8 +25,8 @@ https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
 - 기존 대비 50% 이상 속도 향상.
 
 
-### 3. Class Imbalance Solver
-- Nature에 등재된 nnUNet의 Oversampling 기법 적용.
+### 3. Class Imbalance 해결 파이프라인 구축
+- nnUNet의 Oversampling 기법 적용.
 - Default 값으로 자동으로 Oversample Patch를 뽑아냄.
 - Pipeline상에 Class Weight 적용 지원
 
