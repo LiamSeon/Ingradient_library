@@ -14,6 +14,8 @@ https://glittery-dawn-b91.notion.site/MAIC-40cac48522ba4e5fb4aad94bab33df48
 
 ![스크린샷 2021-10-12 오전 3 29 15](https://user-images.githubusercontent.com/68293683/136837365-2c2534e8-e668-42c5-a5af-89decb96a970.png)
 
+![스크린샷 2021-10-12 오전 3 29 50](https://user-images.githubusercontent.com/68293683/136837440-15a8d492-75c7-4db8-a149-e37d714d460d.png)
+
 
 
 (Custom이 MiD를 뜻함.)
