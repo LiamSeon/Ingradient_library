@@ -6,6 +6,7 @@
 - (Korean)
 https://glittery-dawn-b91.notion.site/MiD-6ed046f1b3f74b12bb05e29eed32c7c2
 - (English)
+https://glittery-dawn-b91.notion.site/MiD-English-bd0480e8099b43e68d14c6c80432df11
 
 
 ## 2. Features
